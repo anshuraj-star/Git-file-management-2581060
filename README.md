@@ -57,6 +57,12 @@ git diff HEAD~1 HEAD --stat
 ### Q3 — File lifecycle and ignore rules
 
 ```bash
+# Use placeholders only; never put real credentials in Git history.
+printf "API_KEY=PLACEHOLDER_NOT_A_SECRET\n" > .env
+printf "Temporary debug output\n" > debug.log
+git add .env debug.log
+git commit -m "temp: commit placeholder env and debug log"
+
 mkdir docs
 git mv notes.txt docs/study-notes.md
 git rm --cached .env
@@ -84,9 +90,15 @@ git log --oneline --graph --decorate -n 4
 ### Q5 — Reset and safe revert
 
 ```bash
+# First make a small temporary edit to a tracked file and commit it.
+git commit -am "test: experimental caching routine"
 git reset --soft HEAD~1
+git status -s
+git commit -m "test: experimental caching routine"
 git reset --mixed HEAD~1
+git status -s
 git reset --hard HEAD
+git status
 git revert HEAD --no-edit
 git log --oneline -n 3
 ```
