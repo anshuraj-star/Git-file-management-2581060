@@ -60,7 +60,7 @@ git diff HEAD~1 HEAD --stat
 # Use placeholders only; never put real credentials in Git history.
 printf "API_KEY=PLACEHOLDER_NOT_A_SECRET\n" > .env
 printf "Temporary debug output\n" > debug.log
-git add .env debug.log
+git add -f .env debug.log
 git commit -m "temp: commit placeholder env and debug log"
 
 mkdir docs
